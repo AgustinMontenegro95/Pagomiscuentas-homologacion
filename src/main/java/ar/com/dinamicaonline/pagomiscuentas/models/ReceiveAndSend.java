@@ -2,6 +2,7 @@ package ar.com.dinamicaonline.pagomiscuentas.models;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,9 +17,17 @@ public class ReceiveAndSend {
     private int id;
     private Date createdOn;
     private int idOrigin;
-    private long idAccount;
+
+    @Column(nullable = true)
+    private Long idAccount;
     private int receiveSend;
     private String messagge;
+
+    @Override
+    public String toString() {
+        return "ReceiveAndSend [id=" + id + ", createdOn=" + createdOn + ", idOrigin=" + idOrigin + ", idAccount="
+                + idAccount + ", receiveSend=" + receiveSend + ", messagge=" + messagge + "]";
+    }
 
     public ReceiveAndSend(int id, Date createdOn, int idOrigin, long idAccount, int receiveSend, String messagge) {
         this.id = id;
@@ -30,6 +39,7 @@ public class ReceiveAndSend {
     }
 
     public ReceiveAndSend() {
+        this.idAccount = null;
     }
 
     public int getId() {
@@ -56,11 +66,11 @@ public class ReceiveAndSend {
         this.idOrigin = idOrigin;
     }
 
-    public long getIdAccount() {
+    public Long getIdAccount() {
         return idAccount;
     }
 
-    public void setIdAccount(long idAccount) {
+    public void setIdAccount(Long idAccount) {
         this.idAccount = idAccount;
     }
 

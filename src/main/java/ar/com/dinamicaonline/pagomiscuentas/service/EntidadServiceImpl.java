@@ -12,7 +12,13 @@ public class EntidadServiceImpl implements EntidadService {
     private EntidadRepository entidadRepository;
 
     @Override
-    public Integer fetchEntidadByDocumentId(String customerId) {
+    public Long fetchEntidadByDocumentId(String customerId) {
         return entidadRepository.findByDocumentId(customerId);
     }
+
+    @Override
+    public String ingresoDineroProc(Long qIdEntidad, Double qPago, String qOrigen) {
+        return entidadRepository.ingresoDinero(qIdEntidad, qPago, qOrigen);
+    }
+
 }

@@ -20,6 +20,18 @@ public class AvisoDto {
 
     private String description;
 
+    @Override
+    public String toString() {
+        return "{\"access_token\":\"" + access_token
+                + "\", \"customer_id\":\"" + customer_id
+                + "\", \"invoice_id\":\"" + invoice_id
+                + "\", \"currency\":\"" + currency
+                + "\", \"due_date\":\"" + due_date
+                + "\", \"amount\":\"" + amount
+                + "\", \"operation_id\":\"" + operation_id
+                + "\", \"description\":\"" + description + "\"}";
+    }
+
     public Integer getId() {
         return id;
     }
