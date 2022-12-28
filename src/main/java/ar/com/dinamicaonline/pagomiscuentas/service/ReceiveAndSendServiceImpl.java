@@ -3,6 +3,7 @@ package ar.com.dinamicaonline.pagomiscuentas.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.com.dinamicaonline.pagomiscuentas.dto.AvisoDto;
 import ar.com.dinamicaonline.pagomiscuentas.models.ReceiveAndSend;
 import ar.com.dinamicaonline.pagomiscuentas.repositories.ReceiveAndSendRepository;
 
@@ -16,11 +17,11 @@ public class ReceiveAndSendServiceImpl implements ReceiveAndSendService {
     private EntidadServiceImpl entidadServiceImpl;
 
     @Override
-    public ReceiveAndSend saveRecieveAndSend(ReceiveAndSend recieveAndSend) {
-        Integer customerId = entidadServiceImpl.fetchEntidadByDocumentId(recieveAndSend.getIdAccount());
+    public ReceiveAndSend saveReceiveAndSend(ReceiveAndSend recieveAndSend, AvisoDto avisoDto) {
+        Integer idAccount = entidadServiceImpl.fetchEntidadByDocumentId(avisoDto.getCustomer_id());
 
-        if (customerId != null) {
-            recieveAndSend.setIdAccount(customerId);
+        if (idAccount != 0) {
+            recieveAndSend.setIdAccount(idAccount);
             recieveAndSendRepository.save(recieveAndSend);
         }
 

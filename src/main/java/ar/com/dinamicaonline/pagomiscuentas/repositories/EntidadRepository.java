@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface EntidadRepository extends JpaRepository<Entidad, Integer> {
 
-    @Query("SELECT entidadId FROM Entidad WHERE documento = :idAccount")
-    public Integer findByDocumentId(@Param("idAccount") long idAccount);
+    @Query(value = "SELECT ENTIDAD_ID FROM entidades WHERE DOCUMENTO = :customerId LIMIT 1", nativeQuery = true)
+    public Integer findByDocumentId(@Param("customerId") String customerId);
 }
