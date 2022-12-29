@@ -29,28 +29,29 @@ public class ReceiveAndSendServiceImpl implements ReceiveAndSendService {
             String QORIGEN = "pagomiscuentas";
             Long QID_ENTIDAD = idAccount;
             // llamada a procedimiento para registrar el pago
-            String resultado = entidadServiceImpl.ingresoDineroProc(QID_ENTIDAD, QPAGO, QORIGEN);
-            System.out.println(resultado);
+            String resProcCashInApp = entidadServiceImpl.ingresoDineroProc(QID_ENTIDAD, QPAGO, QORIGEN);
             ReceiveAndSend receiveAndSend2 = new ReceiveAndSend();
             receiveAndSend2.setCreatedOn(Calendar.getInstance().getTime());
             receiveAndSend2.setIdAccount(QID_ENTIDAD);
             receiveAndSend2.setIdOrigin(idOrigin);
             receiveAndSend2.setReceiveSend(2);
-            receiveAndSend2.setMessagge(resultado);
-            receiveAndSendRepository.save(receiveAndSend2);
+
+            receiveAndSend2.setMessagge("{\"result\":" + resProcCashInApp + ", \"customerId\": \""
+                    + avisoDto.getCustomer_id() + "\", \"amount\": \"" + avisoDto.getAmount() + "\"}");
+            // receiveAndSendRepository.save(receiveAndSend2);
             //
             receiveAndSend.setIdAccount(idAccount);
             receiveAndSendRepository.save(receiveAndSend);
-            return receiveAndSendRepository.save(receiveAndSend);
+            return receiveAndSendRepository.save(receiveAndSend2);
         } else {
             ReceiveAndSend rasError = new ReceiveAndSend();
             rasError.setCreatedOn(Calendar.getInstance().getTime());
             rasError.setIdAccount(null);
             rasError.setIdOrigin(idOrigin);
-            rasError.setReceiveSend(1);
-            rasError.setMessagge("{\"error\":\"Documento no encontrado.\"}");
+            rasError.setReceiveSend(2);
+            rasError.setMessagge(
+                    "{\"error\":\"Documento no encontrado\", \"request\":" + avisoDto.toString() + "}");
             receiveAndSendRepository.save(rasError);
-            System.out.println("ERROR");
         }
 
         return null;

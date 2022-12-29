@@ -18,6 +18,7 @@ import ar.com.dinamicaonline.pagomiscuentas.service.ReceiveAndSendService;
 import ar.com.dinamicaonline.pagomiscuentas.validations.AvisoDtoValidation;
 
 @RestController
+@RequestMapping("/api/v1")
 public class PagoMisCuentasController {
 
     @Autowired
