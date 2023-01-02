@@ -1,9 +1,10 @@
 package ar.com.dinamicaonline.pagomiscuentas.service;
 
+import org.springframework.http.ResponseEntity;
+
 import ar.com.dinamicaonline.pagomiscuentas.dto.AvisoDto;
-import ar.com.dinamicaonline.pagomiscuentas.models.ReceiveAndSend;
 
 public interface ReceiveAndSendService {
     // Save operation
-    ReceiveAndSend saveReceiveAndSend(ReceiveAndSend recieveAndSend, AvisoDto avisoDto);
+    ResponseEntity<?> saveReceiveAndSend(AvisoDto avisoDto);
 }
